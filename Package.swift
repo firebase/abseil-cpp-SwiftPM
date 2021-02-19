@@ -229,6 +229,24 @@ let package = Package(
 
         "absl/synchronization/internal/mutex_nonprod.cc",
 
+        "absl/container/internal/unordered_set_constructor_test.h",
+        "absl/container/internal/unordered_set_members_test.h",
+        "absl/container/internal/unordered_map_modifiers_test.h",
+        "absl/container/internal/unordered_map_lookup_test.h",
+        "absl/container/internal/unordered_set_modifiers_test.h",
+        "absl/container/internal/unordered_map_members_test.h",
+        "absl/container/internal/unordered_set_lookup_test.h",
+        "absl/container/internal/unordered_map_constructor_test.h",
+        "absl/container/btree_test.h",
+
+        "absl/types/internal/conformance_testing.h",
+        "absl/hash/hash_testing.h",
+        "absl/container/internal/hash_policy_testing.h",
+        "absl/container/internal/hash_generator_testing.h",
+        "absl/base/internal/exception_testing.h",
+        "absl/base/internal/exception_safety_testing.h",
+        "absl/base/internal/inline_variable_testing.h",
+
         // main functions
         "absl/hash/internal/print_hash_of.cc",
         "absl/random/internal/gaussian_distribution_gentables.cc",
