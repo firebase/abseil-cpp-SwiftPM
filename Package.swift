@@ -185,6 +185,10 @@ let package = Package(
         "absl/base/call_once_test.cc",
         "absl/utility/utility_test.cc",
 
+        "absl/base/inline_variable_test.cc",
+        "absl/base/inline_variable_test_a.cc",
+        "absl/base/inline_variable_test_b.cc",
+
         "absl/base/spinlock_test_common.cc",
 
         "absl/container/internal/hash_generator_testing.cc",
