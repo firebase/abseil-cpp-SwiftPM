@@ -243,7 +243,17 @@ let package = Package(
       publicHeadersPath: ".",
       cSettings: [
         .headerSearchPath("./"),
+      ],
+      linkerSettings: [
+        .linkedFramework("CoreFoundation"),
       ]
+    ),
+    .testTarget(
+      name: "build-test",
+      dependencies: [
+        "abseil",
+      ],
+      path: "SwiftPMTests/build-test"
     ),
   ],
 
