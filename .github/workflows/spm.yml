@@ -7,21 +7,19 @@ on:
     - cron:  '0 7 * * *'
 
 jobs:
-  swift-build-run:
+  swiftpm-build-tests:
     runs-on: macOS-latest
-    strategy:
-      matrix:
-        target_flags: [ 
-          -sdk 'iphonesimulator' -destination 'platform=iOS Simulator,name=iPhone 11',
-          -sdk 'iphoneos',
-          -sdk 'macosx' -destination 'platform=OS X,arch=x86_64',
-          -sdk "appletvsimulator" -destination 'platform=tvOS Simulator,name=Apple TV'
-        ]
     steps:
     - uses: actions/checkout@v2
     - name: Setup Scripts Directory
       run: ./setup-scripts.sh
     - name: Initialize xcodebuild
       run: xcodebuild -list
-    - name: iOS Unit Tests
-      run: xcodebuild -scheme abseil build ${{ matrix.target_flags }}
+    - name: iOS Simulator Build Tests
+      run: xcodebuild -scheme abseil build -sdk 'iphonesimulator' -destination 'platform=iOS Simulator,name=iPhone 11'
+    - name: macos Build Tests
+      run: xcodebuild -scheme abseil build -sdk 'macosx' -destination 'platform=OS X,arch=x86_64',
+    - name: tvOS Build Tests
+      run: xcodebuild -scheme abseil build -sdk "appletvsimulator" -destination 'platform=tvOS Simulator,name=Apple TV'
+    - name: iOS Device Build Tests
+      run: xcodebuild -scheme abseil build -sdk 'iphoneos'      
