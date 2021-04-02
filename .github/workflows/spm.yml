@@ -1,0 +1,23 @@
+name: spm
+
+on:
+  pull_request:
+  schedule:
+    # Run every day at 11pm (PST) - cron uses UTC times
+    - cron:  '0 7 * * *'
+
+jobs:
+  swiftpm-build-tests:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Initialize xcodebuild
+      run: xcodebuild -list
+    - name: iOS Simulator Build Tests
+      run: xcodebuild -scheme abseil build -sdk 'iphonesimulator' -destination 'platform=iOS Simulator,name=iPhone 11'
+    - name: macos Build Tests
+      run: xcodebuild -scheme abseil build -sdk 'macosx' -destination 'platform=OS X,arch=x86_64',
+    - name: tvOS Build Tests
+      run: xcodebuild -scheme abseil build -sdk "appletvsimulator" -destination 'platform=tvOS Simulator,name=Apple TV'
+    - name: iOS Device Build Tests
+      run: xcodebuild -scheme abseil build -sdk 'iphoneos'      
