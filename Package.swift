@@ -233,9 +233,6 @@ let package = Package(
 
         "absl/synchronization/internal/mutex_nonprod.cc",
 
-        "absl/container/internal/unordered_set_constructor_test.h",
-        "absl/container/internal/unordered_set_members_test.h",
-
         // main functions
         "absl/hash/internal/print_hash_of.cc",
         "absl/random/internal/gaussian_distribution_gentables.cc",
