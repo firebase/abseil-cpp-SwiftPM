@@ -19,6 +19,7 @@
 
 #include "absl/random/internal/randen_hwaes.h"
 
+#include <stdlib.h> // See https://github.com/firebase/firebase-ios-sdk/pull/7563
 #include <cstdint>
 #include <cstring>
 
