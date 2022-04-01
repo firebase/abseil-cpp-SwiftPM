@@ -513,8 +513,10 @@ strings_internal::Splitter<
 StrSplit(StringType&& text, Delimiter d) {
   using DelimiterType =
       typename strings_internal::SelectDelimiter<Delimiter>::type;
+  // NOLINTBEGIN(bugprone-move-forwarding-reference)
   return strings_internal::Splitter<DelimiterType, AllowEmpty, std::string>(
       std::move(text), DelimiterType(d), AllowEmpty());
+  // NOLINTEND
 }
 
 template <typename Delimiter, typename Predicate>
@@ -538,8 +540,10 @@ strings_internal::Splitter<
 StrSplit(StringType&& text, Delimiter d, Predicate p) {
   using DelimiterType =
       typename strings_internal::SelectDelimiter<Delimiter>::type;
+  // NOLINTBEGIN(bugprone-move-forwarding-reference)
   return strings_internal::Splitter<DelimiterType, Predicate, std::string>(
       std::move(text), DelimiterType(d), std::move(p));
+  // NOLINTEND
 }
 
 ABSL_NAMESPACE_END
