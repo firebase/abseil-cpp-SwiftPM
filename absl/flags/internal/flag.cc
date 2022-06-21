@@ -483,7 +483,7 @@ bool FlagImpl::ReadOneBool() const {
 }
 
 void FlagImpl::ReadSequenceLockedData(void* dst) const {
-  int size = Sizeof(op_);
+  int size = (int)Sizeof(op_);
   // Attempt to read using the sequence lock.
   if (ABSL_PREDICT_TRUE(seq_lock_.TryRead(dst, AtomicBufferValue(), size))) {
     return;

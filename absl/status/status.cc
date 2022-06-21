@@ -79,7 +79,7 @@ static int FindPayloadIndexByUrl(const Payloads* payloads,
   if (payloads == nullptr) return -1;
 
   for (size_t i = 0; i < payloads->size(); ++i) {
-    if ((*payloads)[i].type_url == type_url) return i;
+    if ((*payloads)[i].type_url == type_url) return (int)i;
   }
 
   return -1;
