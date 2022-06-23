@@ -173,7 +173,7 @@ bool ReadSeedMaterialFromDevURandom(absl::Span<uint32_t> values) {
   }
 
   while (success && buffer_size > 0) {
-    int bytes_read = read(dev_urandom, buffer, buffer_size);
+    int bytes_read = (int)read(dev_urandom, buffer, buffer_size);
     int read_error = errno;
     success = (bytes_read > 0);
     if (success) {

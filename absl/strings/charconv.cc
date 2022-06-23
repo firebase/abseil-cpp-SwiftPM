@@ -337,7 +337,7 @@ void EncodeResult(const CalculatedFloat& calculated, bool negative,
     *value = negative ? -0.0 : 0.0;
     return;
   }
-  *value = FloatTraits<FloatType>::Make(calculated.mantissa,
+  *value = FloatTraits<FloatType>::Make((uint32_t)(calculated.mantissa),
                                         calculated.exponent, negative);
 }
 

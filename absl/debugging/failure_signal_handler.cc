@@ -326,7 +326,7 @@ static void AbslFailureSignalHandler(int signo, siginfo_t*, void* ucontext) {
   const GetTidType this_tid = absl::base_internal::GetTID();
   GetTidType previous_failed_tid = 0;
   if (!failed_tid.compare_exchange_strong(
-          previous_failed_tid, static_cast<intptr_t>(this_tid),
+          previous_failed_tid, static_cast<int>(this_tid),
           std::memory_order_acq_rel, std::memory_order_relaxed)) {
     ABSL_RAW_LOG(
         ERROR,
