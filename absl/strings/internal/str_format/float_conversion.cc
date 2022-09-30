@@ -465,7 +465,7 @@ Padding ExtraWidthToPadding(size_t total_size, const FormatState &state) {
       static_cast<size_t>(state.conv.width()) <= total_size) {
     return {0, 0, 0};
   }
-  int missing_chars = (int)(state.conv.width() - total_size);
+  int missing_chars = state.conv.width() - total_size;
   if (state.conv.has_left_flag()) {
     return {0, 0, missing_chars};
   } else if (state.conv.has_zero_flag()) {
@@ -1263,7 +1263,7 @@ bool FloatToBuffer(Decomposed<Float> decomposed, int precision, Buffer *out,
   if (CanFitMantissa<Float, std::uint64_t>() &&
       FloatToBufferImpl<std::uint64_t, Float, mode>(
           static_cast<std::uint64_t>(decomposed.mantissa),
-          static_cast<int>(decomposed.exponent), precision, out, exp))
+          static_cast<std::uint64_t>(decomposed.exponent), precision, out, exp))
     return true;
 
 #if defined(ABSL_HAVE_INTRINSIC_INT128)

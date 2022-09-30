@@ -42,7 +42,6 @@
 #include <ctime>
 
 #include "absl/base/attributes.h"
-#include "absl/base/internal/errno_saver.h"
 #include "absl/base/internal/raw_logging.h"
 #include "absl/base/internal/sysinfo.h"
 #include "absl/debugging/internal/examine_stack.h"
@@ -52,7 +51,7 @@
 #define ABSL_HAVE_SIGACTION
 // Apple WatchOS and TVOS don't allow sigaltstack
 #if !(defined(TARGET_OS_WATCH) && TARGET_OS_WATCH) && \
-    !(defined(TARGET_OS_TV) && TARGET_OS_TV)
+    !(defined(TARGET_OS_TV) && TARGET_OS_TV) && !defined(__QNX__)
 #define ABSL_HAVE_SIGALTSTACK
 #endif
 #endif
@@ -217,8 +216,7 @@ static void InstallOneFailureHandler(FailureSignalData* data,
 #endif
 
 static void WriteToStderr(const char* data) {
-  absl::base_internal::ErrnoSaver errno_saver;
-  absl::raw_logging_internal::SafeWriteToStderr(data, strlen(data));
+  absl::raw_logging_internal::AsyncSignalSafeWriteToStderr(data, strlen(data));
 }
 
 static void WriteSignalMessage(int signo, int cpu,
@@ -326,7 +324,7 @@ static void AbslFailureSignalHandler(int signo, siginfo_t*, void* ucontext) {
   const GetTidType this_tid = absl::base_internal::GetTID();
   GetTidType previous_failed_tid = 0;
   if (!failed_tid.compare_exchange_strong(
-          previous_failed_tid, static_cast<int>(this_tid),
+          previous_failed_tid, static_cast<intptr_t>(this_tid),
           std::memory_order_acq_rel, std::memory_order_relaxed)) {
     ABSL_RAW_LOG(
         ERROR,

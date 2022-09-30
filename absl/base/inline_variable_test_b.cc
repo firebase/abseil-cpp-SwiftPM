@@ -12,9 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Disable LeakSanitizer when this file is linked in.
-// This function overrides __lsan_is_turned_off from sanitizer/lsan_interface.h
-extern "C" int __lsan_is_turned_off();
-extern "C" int __lsan_is_turned_off() {
-  return 1;
-}
+#include "absl/base/internal/inline_variable_testing.h"
+
+namespace absl {
+ABSL_NAMESPACE_BEGIN
+namespace inline_variable_testing_internal {
+
+const Foo& get_foo_b() { return inline_variable_foo; }
+
+const int& get_int_b() { return inline_variable_int; }
+
+}  // namespace inline_variable_testing_internal
+ABSL_NAMESPACE_END
+}  // namespace absl
