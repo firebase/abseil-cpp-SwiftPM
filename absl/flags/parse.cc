@@ -159,7 +159,7 @@ class ArgsList {
   // Returns success status: true if parsing successful, false otherwise.
   bool ReadFromFlagfile(const std::string& flag_file_name);
 
-  int Size() const { return (int)(args_.size() - next_arg_); }
+  int Size() const { return args_.size() - next_arg_; }
   int FrontIndex() const { return next_arg_; }
   absl::string_view Front() const { return args_[next_arg_]; }
   void PopFront() { next_arg_++; }

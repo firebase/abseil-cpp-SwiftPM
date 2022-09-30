@@ -456,7 +456,7 @@ static bool MaybeAppendDecimal(State *state, unsigned int val) {
     } while (p > buf && val != 0);
 
     // 'p' landed on the last character we set.  How convenient.
-    Append(state, p, (int)(kMaxLength - (p - buf)));
+    Append(state, p, kMaxLength - (p - buf));
   }
 
   return true;
@@ -466,7 +466,7 @@ static bool MaybeAppendDecimal(State *state, unsigned int val) {
 // Returns true so that it can be placed in "if" conditions.
 static bool MaybeAppend(State *state, const char *const str) {
   if (state->parse_state.append) {
-    int length = (int)StrLen(str);
+    int length = StrLen(str);
     MaybeAppendWithLength(state, str, length);
   }
   return true;
@@ -853,7 +853,7 @@ static bool ParseNumber(State *state, int *number_out) {
     state->parse_state.mangled_idx += p - RemainingInput(state);
     if (number_out != nullptr) {
       // Note: possibly truncate "number".
-      *number_out = (int)number;
+      *number_out = number;
     }
     return true;
   }

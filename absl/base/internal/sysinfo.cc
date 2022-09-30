@@ -124,7 +124,6 @@ int Win32NumCPUs() {
 
 }  // namespace
 
-
 static int GetNumCPUs() {
 #if defined(__myriad2__)
   return 1;
@@ -430,7 +429,7 @@ static constexpr int kBitsPerWord = 32;  // tid_array is uint32_t.
 // Returns the TID to tid_array.
 static void FreeTID(void *v) {
   intptr_t tid = reinterpret_cast<intptr_t>(v);
-  int word = (int)(tid / kBitsPerWord);
+  int word = tid / kBitsPerWord;
   uint32_t mask = ~(1u << (tid % kBitsPerWord));
   absl::base_internal::SpinLockHolder lock(&tid_lock);
   assert(0 <= word && static_cast<size_t>(word) < tid_array->size());
@@ -456,7 +455,7 @@ pid_t GetTID() {
 
   intptr_t tid = reinterpret_cast<intptr_t>(pthread_getspecific(tid_key));
   if (tid != 0) {
-    return (pid_t)tid;
+    return tid;
   }
 
   int bit;  // tid_array[word] = 1u << bit;
