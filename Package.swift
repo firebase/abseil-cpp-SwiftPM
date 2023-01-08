@@ -22,7 +22,7 @@ let package = Package(
         // main functions
         "absl/hash/internal/print_hash_of.cc",
         "absl/random/internal/gaussian_distribution_gentables.cc",
-        "absl/random/internal/randen_benchmarks.cc",
+        // "absl/random/internal/randen_benchmarks.cc",
       ],
       sources: [
         "absl/"
