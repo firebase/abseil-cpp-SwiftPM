@@ -46,3 +46,6 @@
 #include "absl/types/any.h"
 #include "absl/types/optional.h"
 #include "absl/types/variant.h"
+
+// Test for duplicate `_main` symbol.
+int main(int argc, char** argv) {}

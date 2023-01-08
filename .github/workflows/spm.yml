@@ -20,4 +20,4 @@ jobs:
     - name: tvOS Build Tests
       run: xcodebuild -scheme abseil build -sdk "appletvsimulator" -destination 'platform=tvOS Simulator,name=Apple TV'
     - name: iOS Device Build Tests
-      run: xcodebuild -scheme abseil build -sdk 'iphoneos'      
+      run: xcodebuild -scheme abseil build -sdk 'iphoneos' -destination 'generic/platform=iOS'
