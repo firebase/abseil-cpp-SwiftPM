@@ -1148,11 +1148,14 @@ constexpr int64_t BitCastToSigned(uint64_t v) {
 
 }  // namespace int128_internal
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmodules-import-nested-redundant"
 #if defined(ABSL_HAVE_INTRINSIC_INT128)
 #include "absl/numeric/int128_have_intrinsic.inc"  // IWYU pragma: export
 #else  // ABSL_HAVE_INTRINSIC_INT128
 #include "absl/numeric/int128_no_intrinsic.inc"  // IWYU pragma: export
 #endif  // ABSL_HAVE_INTRINSIC_INT128
+#pragma clang diagnostic pop
 
 ABSL_NAMESPACE_END
 }  // namespace absl
