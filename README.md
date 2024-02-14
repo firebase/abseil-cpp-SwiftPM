@@ -1,14 +1,3 @@
-# Swift Package Manager copy repository
-
-This repository is a copy of https://github.com/firebase/abseil-cpp with
-the git metadata removed to provide one to two orders of magnitude increase in
-speed for Swift Package Manager usage.
-
-This repo is not supported as a direct dependency for non-Google usage.
-
-There should be no changes to this repo other than updates from its mirror
-and Swift Package Manager specific items.
-
 # Abseil - C++ Common Libraries
 
 The repository contains the Abseil C++ library code. Abseil is an open-source
