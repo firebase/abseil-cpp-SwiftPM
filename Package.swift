@@ -20,6 +20,7 @@ let package = Package(
       path: ".",
       exclude: [
         // main functions
+        "absl/base/c_header_test.c",
         "absl/hash/internal/print_hash_of.cc",
         "absl/random/internal/gaussian_distribution_gentables.cc",
         "absl/random/internal/randen_benchmarks.cc",
