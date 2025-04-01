@@ -56,6 +56,9 @@ let package = Package(
         "absl/base/internal/spinlock_linux.inc",
         "absl/base/internal/spinlock_posix.inc",
         "absl/base/internal/spinlock_win32.inc",
+        // other files
+        "absl/flags/flag_benchmark.lds",
+        "absl/abseil.podspec.gen.py",
       ],
       sources: [
         "absl/"

@@ -48,4 +48,5 @@
 #include "absl/types/variant.h"
 
 // Test for duplicate `_main` symbol.
-int main(int argc, char** argv) {}
+// _main is defined in runner.swift, any other definition of `_main` in abseil
+// files will cause a duplicate symbol error.
