@@ -49,6 +49,8 @@ set(ABSL_INTERNAL_DLL_FILES
   "base/internal/thread_identity.h"
   "base/internal/throw_delegate.cc"
   "base/internal/throw_delegate.h"
+  "base/internal/tracing.cc"
+  "base/internal/tracing.h"
   "base/internal/tsan_mutex_interface.h"
   "base/internal/unaligned_access.h"
   "base/internal/unscaledcycleclock.cc"
@@ -191,6 +193,8 @@ set(ABSL_INTERNAL_DLL_FILES
   "log/internal/proto.cc"
   "log/internal/strip.h"
   "log/internal/structured.h"
+  "log/internal/structured_proto.cc"
+  "log/internal/structured_proto.h"
   "log/internal/vlog_config.cc"
   "log/internal/vlog_config.h"
   "log/internal/voidify.h"
@@ -834,6 +838,7 @@ function(absl_make_dll)
     PRIVATE
       ${_dll_libs}
       ${ABSL_DEFAULT_LINKOPTS}
+      $<$<BOOL:${ANDROID}>:-llog>
   )
   set_target_properties(${_dll} PROPERTIES
     LINKER_LANGUAGE "CXX"
