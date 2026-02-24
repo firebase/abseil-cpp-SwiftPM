@@ -81,6 +81,7 @@ for std in ${STD}; do
           --action_env=\"CPLUS_INCLUDE_PATH=/opt/llvm/libcxx/include/c++/v1\" \
           --compilation_mode=\"${compilation_mode}\" \
           --copt=\"${exceptions_mode}\" \
+          --copt=\"-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG\" \
           --copt=\"-DGTEST_REMOVE_LEGACY_TEST_CASEAPI_=1\" \
           --copt=\"-fsanitize=address\" \
           --copt=\"-fsanitize=${UBSAN_CHECKS}\" \
@@ -92,6 +93,7 @@ for std in ${STD}; do
           --keep_going \
           --linkopt=\"-fsanitize=address\" \
           --linkopt=\"-fsanitize-link-c++-runtime\" \
+          --per_file_copt=external/.*@-w \
           --show_timestamps \
           --test_env=\"ASAN_SYMBOLIZER_PATH=/opt/llvm/clang/bin/llvm-symbolizer\" \
           --test_env=\"TZDIR=/abseil-cpp/absl/time/internal/cctz/testdata/zoneinfo\" \

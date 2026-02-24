@@ -19,8 +19,8 @@
 
 set -euox pipefail
 
-# Use Xcode 16.0
-sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer
+# Use Xcode 16.3
+sudo xcode-select -s /Applications/Xcode_16.3.app/Contents/Developer
 
 if [[ -z ${ABSEIL_ROOT:-} ]]; then
   ABSEIL_ROOT="$(realpath $(dirname ${0})/..)"
@@ -37,8 +37,8 @@ fi
 
 # Use Bazel Vendor mode to reduce reliance on external dependencies.
 if [[ ${KOKORO_GFILE_DIR:-} ]] && [[ -f "${KOKORO_GFILE_DIR}/distdir/abseil-cpp_vendor.tar.gz" ]]; then
-  tar -xf "${KOKORO_GFILE_DIR}/distdir/abseil-cpp_vendor.tar.gz" -C "${TMP}/"
-  BAZEL_EXTRA_ARGS="--vendor_dir=\"${TMP}/abseil-cpp_vendor\" ${BAZEL_EXTRA_ARGS:-}"
+  tar -xf "${KOKORO_GFILE_DIR}/distdir/abseil-cpp_vendor.tar.gz" -C "${HOME}/"
+  BAZEL_EXTRA_ARGS="--vendor_dir=${HOME}/abseil-cpp_vendor ${BAZEL_EXTRA_ARGS:-}"
 fi
 
 # Print the compiler and Bazel versions.
@@ -54,9 +54,6 @@ if [[ -n "${ALTERNATE_OPTIONS:-}" ]]; then
   cp ${ALTERNATE_OPTIONS:-} absl/base/options.h || exit 1
 fi
 
-# Avoid using the system version of google-benchmark.
-brew uninstall google-benchmark
-
 ${BAZEL_BIN} test ... \
   --copt="-DGTEST_REMOVE_LEGACY_TEST_CASEAPI_=1" \
   --copt="-Werror" \
@@ -64,6 +61,7 @@ ${BAZEL_BIN} test ... \
   --enable_bzlmod=true \
   --features=external_include_paths \
   --keep_going \
+  --per_file_copt=external/.*@-w \
   --show_timestamps \
   --test_env="TZDIR=${ABSEIL_ROOT}/absl/time/internal/cctz/testdata/zoneinfo" \
   --test_output=errors \
