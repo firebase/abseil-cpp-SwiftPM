@@ -48,6 +48,9 @@ let package = Package(
         // other files
         "absl/flags/flag_benchmark.lds",
         "absl/abseil.podspec.gen.py",
+        "absl/time/internal/cctz/src/time_zone_name_win.cc",
+        "absl/crc/internal/gen_crc32c_consts.py",
+        "absl/time/internal/cctz/src/test_time_zone_names.cc"
       ],
       sources: [
         "absl/"

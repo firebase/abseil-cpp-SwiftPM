@@ -23,8 +23,8 @@ if (POLICY CMP0141)
   cmake_policy(SET CMP0141 NEW)
 endif (POLICY CMP0141)
 
-project(absl LANGUAGES CXX VERSION 20250512)
-set(ABSL_SOVERSION "2505.0.0")
+project(absl LANGUAGES CXX VERSION 20260526)
+set(ABSL_SOVERSION "2605.0.0")
 include(CTest)
 
 # Output directory is correct by default for most build setups. However, when
@@ -217,7 +217,7 @@ if(ABSL_ENABLE_INSTALL)
 
   # Handle features that require at least C++20.
   if (ABSL_INTERNAL_AT_LEAST_CXX20)
-    foreach(FEATURE "ORDERING")
+    foreach(FEATURE "ORDERING" "SOURCE_LOCATION")
       string(REPLACE
       "#define ABSL_OPTION_USE_STD_${FEATURE} 2"
       "#define ABSL_OPTION_USE_STD_${FEATURE} 1"

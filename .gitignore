@@ -1,3 +1,5 @@
+# Bzlmod lockfile
+MODULE.bazel.lock
 # Ignore all bazel-* symlinks.
 /bazel-*
 # Ignore Bazel verbose explanations
@@ -13,5 +15,11 @@ CMakeLists.txt.user
 # Ignore generated python artifacts
 *.pyc
 copts/__pycache__/
-# SwiftPM build directory
+
+# Ignore build files.
+.build/
 .swiftpm/
+
+# Ignore target under any directory.
+target/
+.DS_Store
