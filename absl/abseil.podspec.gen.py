@@ -13,7 +13,7 @@ import collections
 import os
 import re
 import subprocess
-import defusedxml.ElementTree
+import xml.etree.ElementTree
 
 # Template of root podspec.
 SPEC_TEMPLATE = """
@@ -100,7 +100,7 @@ def read_build(package):
   """Runs bazel query on given package file and returns all cc rules."""
   result = subprocess.check_output(
       ["bazel", "query", package + ":all", "--output", "xml"])
-  root = defusedxml.ElementTree.fromstring(result)
+  root = xml.etree.ElementTree.fromstring(result)
   return [
       parse_rule(elem, package)
       for elem in root
