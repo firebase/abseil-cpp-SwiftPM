@@ -8,11 +8,13 @@ on:
 
 jobs:
   swiftpm-build-tests:
+    permissions:
+      contents: read
     runs-on: macOS-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
     - name: Set Xcode version
-      run: sudo xcode-select -s /Applications/Xcode_16.4.app
+      run: sudo xcode-select -s /Applications/Xcode_26.4.app
     - name: Initialize xcodebuild
       run: xcodebuild -list
     - name: iOS Simulator Build Tests
